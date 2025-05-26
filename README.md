@@ -1,3 +1,12 @@
+---
+title: D365stuff Chat
+emoji: 🦀
+colorFrom: yellow
+colorTo: red
+sdk: docker
+pinned: false
+---
+
 # D365Stuff Chat
 
 A conversational AI interface for the D365Stuff blog, built by [TheDataGuy.pro](https://thedataguy.pro) using the [Let's Talk](https://github.com/mafzaal/lets-talk) framework. This application allows users to interact with the blog's content in a natural, conversational way.
