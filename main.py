@@ -233,20 +233,9 @@ def main():
     logging.info("Download process completed!")
 
 if __name__ == "__main__":
-    #main()
+    main()
 
-    
-    #from lets_talk.agent_v2 import retrive_documents
-    #from lets_talk.config import LLM_MODEL,LLM_TEMPERATURE
-    #from lets_talk.rag import retriever
-    #retriever.invoke("What is the main content of the page?")
-    #print(LLM_MODEL)
-    #print(LLM_TEMPERATURE)
-    
-    
-    from lets_talk.rag import retriever
-    docs = retriever.invoke("How to use json with D365?")
-    print(docs)
+
     
     
     

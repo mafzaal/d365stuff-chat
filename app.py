@@ -1,6 +1,6 @@
 import sys
 from pathlib import Path
-from click import prompt
+
 from langchain.schema.runnable.config import RunnableConfig
 from langchain_core.messages import HumanMessage
 from dotenv import load_dotenv
@@ -26,11 +26,10 @@ else:
 
 import chainlit as cl
 
-# from lets_talk.agent import create_agent, build_graph
-#tdg_agent = create_agent(build_graph())
 
-
-from agent import agent as d365stuff_agent
+from prompt import prompt
+from lets_talk.agent_v2 import create_agent
+d365stuff_agent = create_agent(prompt=prompt)
   
 @cl.on_chat_start
 async def setup_chain():
@@ -38,8 +37,6 @@ async def setup_chain():
     # Store the chain in user session
     cl.user_session.set("agent", d365stuff_agent)
     
-    # response = tdg_agent.invoke({"question": "Greet the user and provide latest 2 blog posts"})
-    # content = parse_output(response)
 
     # Set a loading message
     welcome_message = "Welcome to [D365 Stuff](https://www.d365stuff.co) Chat! How can I help you today?"
@@ -69,7 +66,6 @@ async def on_message(message: cl.Message):
     # msg = cl.Message(content="")
 
     final_answer = cl.Message(content="")
-    print("Session Id:",cl.context.session.id)
     configurable = {"thread_id": cl.context.session.id}
     cb = cl.LangchainCallbackHandler()
     runnable_config= RunnableConfig(callbacks=[cb], configurable=configurable)

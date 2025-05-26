@@ -1064,7 +1064,7 @@ wheels = [
 [[package]]
 name = "lets-talk"
 version = "0.1.0"
-source = { git = "https://github.com/mafzaal/lets-talk.git?rev=main#43df85f5305509b70846b2aff724e8fe724ec116" }
+source = { git = "https://github.com/mafzaal/lets-talk.git?rev=main#dff367779792429076af4f261a958be4c36beacb" }
 dependencies = [
     { name = "aiohttp" },
     { name = "arxiv" },
