@@ -9,111 +9,64 @@ pinned: false
 
 # D365Stuff Chat
 
-A conversational AI interface for the D365Stuff blog, built by [TheDataGuy.pro](https://thedataguy.pro) using the [Let's Talk](https://github.com/mafzaal/lets-talk) framework. This application allows users to interact with the blog's content in a natural, conversational way.
+Welcome to D365Stuff Chat, an AI-powered assistant that helps you navigate and understand content from the [D365Stuff](https://www.d365stuff.co) blog. This chat interface allows you to interact with the blog's content in a conversational way.
 
 ## Features
 
-- 🤖 AI-powered chat interface for D365Stuff blog content
-- 🔍 Smart search and retrieval of relevant blog posts
-- 💻 Code examples with syntax highlighting
-- 🌐 Multi-language support
-- 🎨 Dark/Light theme support
-- 📤 File upload capabilities
-- 🔒 Privacy-focused (no permanent conversation storage)
+- **Smart Search**: Ask questions about Dynamics 365 Finance and Operations, X++ development, and integration topics
+- **Real-time Responses**: Get immediate answers based on the blog's content
+- **Code Examples**: View and copy code snippets with proper syntax highlighting
+- **Multi-language Support**: Interface available in multiple languages including English, Hindi, Chinese, and more
+- **Dark/Light Theme**: Choose your preferred interface theme
 
-## Prerequisites
+## Getting Started
 
-- Python 3.13 or higher
-- Docker (optional, for containerized deployment)
-- UV package manager
+1. Type your question in the chat input box
+2. The assistant will search through the blog content and provide relevant answers
+3. You can ask follow-up questions to dive deeper into any topic
+4. Use the file upload feature to share additional context if needed
 
-## Installation
+## Supported Topics
 
-1. Clone the repository:
-```bash
-git clone https://github.com/mafzaal/d365stuff-chat.git
-cd d365stuff-chat
-```
+The assistant can help you with:
 
-2. Install dependencies using UV:
-```bash
-uv sync
-```
+- Dynamics 365 Finance and Operations development
+- X++ programming and best practices
+- Integration patterns and solutions
+- Data management and ETL processes
+- Web services and API development
+- Performance optimization and debugging
+- Logic Apps and Azure integration
+- Data entities and data management framework
+- Batch processing and job management
+- Security and authentication patterns
 
-3. Set up environment variables:
-```bash
-cp .env.example .env
-# Edit .env with your configuration
-```
+## Tips for Best Results
 
-## Running the Application
+1. Be specific in your questions
+2. Include relevant context when asking about code or implementations
+3. Use technical terms when appropriate
+4. Ask follow-up questions to clarify or expand on answers
+5. Share code snippets or error messages when seeking debugging help
 
-### Local Development
+## Technical Details
 
-```bash
-uv run chainlit run app.py --port 8000
-```
+The chat interface is built using:
+- Chainlit for the chat UI
+- LangChain for the AI agent
+- Qdrant for vector database and efficient content retrieval
+- Docker for containerization
+- Powered by [Together.ai](https://api.together.ai/models/meta-llama/Llama-3.3-70B-Instruct-Turbo-Free)'s Llama 3.3 70B Instruct Turbo model
+- Hosted on [Hugging Face](https://mafzaal-d365stuff-chat.hf.space/)
+- Built by [TheDataGuy.pro](https://thedataguy.pro) using [Let's Talk](https://github.com/mafzaal/lets-talk) framework
 
-### Docker Deployment
+## Support
 
-```bash
-docker build -t d365stuff-chat .
-docker run -p 7860:7860 d365stuff-chat
-```
+For issues or suggestions, please visit [D365Stuff](https://www.d365stuff.co) or contact the blog author.
 
-## Project Structure
+## Privacy
 
-```
-.
-├── app.py              # Main application entry point
-├── prompt.py           # Chat prompt configuration
-├── pipeline.py        # Blog data processing pipeline
-├── data/             # Blog post data
-├── stats/            # Processing statistics
-└── .chainlit/        # Chainlit configuration
-```
-
-## Configuration
-
-The application can be configured through:
-
-- `.env` file for environment variables
-- `.chainlit/config.toml` for UI settings
-
-## Blog Data Processing
-
-The application includes a pipeline for processing blog posts:
-
-```bash
-python pipeline.py [--force-recreate] [--data-dir DATA_DIR] [--output-dir OUTPUT_DIR]
-```
-
-Options:
-- `--force-recreate`: Force recreation of the vector store
-- `--data-dir`: Directory containing blog posts
-- `--output-dir`: Directory for stats and artifacts
-- `--no-chunking`: Process whole documents without chunking
-- `--no-save-stats`: Skip saving document statistics
-
-## Contributing
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## Built With
-
-- [Chainlit](https://github.com/Chainlit/chainlit) - Chat UI framework
-- [LangChain](https://github.com/langchain-ai/langchain) - AI agent framework
-- [Let's Talk](https://github.com/mafzaal/lets-talk) - Conversational AI framework by TheDataGuy.pro
-- [Docker](https://www.docker.com/) - Containerization
-
-## Acknowledgments
-
-- Built by [TheDataGuy.pro](https://thedataguy.pro) using the [Let's Talk](https://github.com/mafzaal/lets-talk) framework
-- Blog content from [D365Stuff](https://www.d365stuff.co)
+Your conversations are private and not stored permanently. The system only uses the content to provide relevant answers from the blog posts.
 
 ## License
 
