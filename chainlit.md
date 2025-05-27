@@ -47,6 +47,7 @@ The chat interface is built using:
 - LangChain for the AI agent
 - Vector database for efficient content retrieval
 - Docker for containerization
+- Powered by [Together.ai](https://api.together.ai/models/meta-llama/Llama-3.3-70B-Instruct-Turbo-Free)'s Llama 3.3 70B Instruct Turbo model
 - Built by [TheDataGuy.pro](https://thedataguy.pro) using [Let's Talk](https://github.com/mafzaal/lets-talk) framework
 
 ## Support
