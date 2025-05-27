@@ -97,8 +97,8 @@ def get_filename_from_url(url):
     # Remove any special characters and replace spaces with hyphens
     filename = ''.join(c for c in filename if c.isalnum() or c in ('-', '_', '.'))
     # Ensure filename is not too long (max 50 chars)
-    if len(filename) > 50:
-        filename = filename[:50]
+    #if len(filename) > 50:
+    #    filename = filename[:50]
     return filename
 
 def extract_json_ld_metadata(html_content):

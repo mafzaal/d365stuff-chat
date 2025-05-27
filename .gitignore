@@ -12,3 +12,5 @@ html_pages/
 posts_markitdown/
 .env
 db/
+artifacts/
+d365stuff_downloader.log

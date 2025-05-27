@@ -1,27 +1,74 @@
+import os
 import sys
 from pathlib import Path
+import zipfile
+import logging
+import requests
+
 
 from langchain.schema.runnable.config import RunnableConfig
 from langchain_core.messages import HumanMessage
 from dotenv import load_dotenv
+
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
+logger = logging.getLogger(__name__)
+
 # Load environment variables from .env file
 load_dotenv()
-from lets_talk.config import (CREATE_VECTOR_DB,VECTOR_STORAGE_PATH)
+from lets_talk.config import VECTOR_STORAGE_PATH
 
+VECTOR_STORE_DOWNLOAD_URL = os.getenv("VECTOR_STORE_DOWNLOAD_URL")
 
+def download_from_dropbox(direct_download_url):
+    """Download a file from Dropbox with proper handling of the download link."""
+    try:
+                    
 
-if CREATE_VECTOR_DB:
-    import pipeline
-    #build vector store
-    print("=== create vector db ===")
-    # Use configuration from config rather than hardcoded values
-    pipeline.create_vector_database()
-    print("========================")
+        
+        logger.info("Downloading vector store from %s...", direct_download_url)
+        response = requests.get(direct_download_url, stream=True)
+        response.raise_for_status()
+        
+        # Save to temp file
+        with open("/tmp/vector_store.zip", "wb") as f:
+            for chunk in response.iter_content(chunk_size=8192):
+                if chunk:
+                    f.write(chunk)
+        
+        logger.info("Download completed successfully")
+        return True
+    except Exception as e:
+        logger.error("Failed to download from Dropbox: %s", str(e))
+        return False
+if Path(VECTOR_STORAGE_PATH).exists():
+    logger.info("Vector store already exists at %s", VECTOR_STORAGE_PATH)
+elif VECTOR_STORE_DOWNLOAD_URL:
+    logger.info("Starting vector store download process")
+    if download_from_dropbox(VECTOR_STORE_DOWNLOAD_URL):
+        try:
+            # Verify the zip file
+            with zipfile.ZipFile("/tmp/vector_store.zip", "r") as zip_ref:
+                logger.info("Extracting vector store files...")
+                zip_ref.extractall(VECTOR_STORAGE_PATH)
+                logger.info("Vector store extraction completed")
+        except zipfile.BadZipFile:
+            logger.error("Downloaded file is not a valid zip file")
+            sys.exit(1)
+        except Exception as e:
+            logger.error("Failed to extract vector store: %s", str(e))
+            sys.exit(1)
+    else:
+        logger.error("Failed to download vector store")
+        sys.exit(1)
 else:
     # Check if the vector store exists
-    print("=== check vector db ===")
+    logger.info("Checking vector store...")
     if not Path(VECTOR_STORAGE_PATH).exists():
-        print(f"Vector store not found at {VECTOR_STORAGE_PATH}. Please create it first.")
+        logger.error("Vector store not found at %s. Please create it first.", VECTOR_STORAGE_PATH)
         sys.exit(1)
 
 import chainlit as cl

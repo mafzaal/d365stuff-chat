@@ -68,3 +68,7 @@ htmlcov/
 # System files
 .DS_Store
 Thumbs.db
+artifacts/
+d365stuff_downloader.log
+html_pages/
+posts_markitdown/
